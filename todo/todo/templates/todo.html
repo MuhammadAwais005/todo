@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins:wght@400; 500; 700& 
+display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Font Awesome 5 Brands: wght@400&display=swap"
+    />
+    <script
+      src="https://kit.fontawesome.com/cb792c0850.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="signup">
+      <div id="crocks"><h1>Hello {{user}}</h1></div>
+      <div class="signup-box">
+        <div id="crocks" class="heading">Get things DOne ?</div>
+        <a href="{% url 'logout' %}"
+          ><i id="logout_arrow" class="fa-solid fa-right-from-bracket"></i
+        ></a>
+        <form method="post">
+          {% csrf_token %}
+          <input
+            type="text"
+            class="inp"
+            name="title"
+            required
+            placeholder=" Enter Today's Taks"
+          />
+         <input type="submit" class="submit-button" value="Add Task" />
+        </form>
+        {% for todo in res %}
+        <div class="ToDo">
+          <h5>{{todo.srno}}.</h5>
+          <p>{{todo.title}}</p>
+          <div>
+            <a href="{% url 'edit_task' todo.id %}"
+              ><i class="fa-solid fa-pen-to-square"></i
+            ></a>
+            <a href="{% url 'delete_task' todo.id %}"
+              ><i class="fa-solid fa-trash"></i
+            ></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
